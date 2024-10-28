@@ -1,13 +1,17 @@
-name: My Workflow
+name: My Worklof
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
-jobs: 
-  my-jobs:
+jobs:
+  my-workflow:
     runs-on: ubuntu-latest
-    steps: 
-      -name: "Hello World"
-       run: echo "Hello World"
+    steps:
+      - name: Print Hello World
+        run: echo "Hello, World!"
+      
+      - name: Print Hello World
+        run: echo "Hello, World!"
 
-      -name: "Hello World"
-       run: echo "Hello World"
