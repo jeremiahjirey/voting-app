@@ -5,9 +5,10 @@ on:
       - "dev"
     paths:
       - .github/workflows/lks-dev-pipeline.yaml
-      - "worker/**"
+      - docker-stack.yaml
+      - README.md
 
-env:
+.env:
   AWS_REGION: "us-east-1"
   ENV: "dev"
 permissions:
@@ -39,24 +40,10 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: voting-app
         WORKER_IMAGE_TAG: worker-${{ env.ENV }}-latest
-        RESULT_IMAGE_TAG: result-$((env.ENV))-latest
-        WORKER_IMAGE_TAG: worker-$((env.ENV))-latest
-        
-
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG --build-arg aws_region=${{ env.AWS_REGION }} --build-arg copy_or_mount="copy" -f worker/Dockerfile ./vote
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG
-
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG --build-arg aws_region=${{ env.AWS_REGION }} --build-arg in_aws="yes" --build-arg copy_or_mount="copy" -f result/Docker
-        docker push SECR_REGISTRY/SECR_REPOSITORY: $RESULT_IMAGE_TAG
-
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG --build-arg aws_region=${{ env.AWS_REGION }} --build-arg copy_or_mount="copy" -f worker/Dockerfile ./worker
-        docker push SECR_REGISTRY/SECR_REPOSITORY: $RESULT_IMAGE_TAG
-
-
-
+        docker build -t voting-app .
+        docker build -t voting-app .
         echo "::set-output name=worker_image::$ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG"
 
     - name: End Build
