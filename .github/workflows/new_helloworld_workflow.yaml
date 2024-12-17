@@ -1,11 +1,7 @@
+name: My Workflow
 
-
-on:
-  push:
-    branches:
-      - main
-name: hello-world
 on: push
+
 jobs:
   my-job:
     runs-on: ubuntu-latest
@@ -16,13 +12,13 @@ jobs:
       - name: my-second-step
         run: edho "Hello World!"
 
-runner-jobs:
-  my-workflow:
-    runs-on: master
-    steps:
-      - name: my-fist-step
-        run: echo "Hello, World!" >> /home/ec2-user/test.txt
-      
-      - name: my-first-step
-        run: cat /home/ec2-user/test.txt
+  runner-jobs:
+    my-workflow:
+      runs-on: master
+      steps:
+        - name: my-fist-step
+          run: echo "Hello, World!" >> /home/ec2-user/test.txt
+        
+        - name: my-first-step
+          run: cat /home/ec2-user/test.txt
 
