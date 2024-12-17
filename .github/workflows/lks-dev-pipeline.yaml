@@ -5,8 +5,7 @@ on:
       - "dev"
     paths:
       - .github/workflows/lks-dev-pipeline.yaml
-      - docker-stack.yaml
-      - README.md
+      - "worker/**"
 
 .env:
   AWS_REGION: "us-east-1"
