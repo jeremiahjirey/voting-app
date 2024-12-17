@@ -4,6 +4,17 @@ on:
   push:
     branches:
       - main
+name: hello-world
+on: push
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: my-first-step
+        run: echo "Hello World!"
+        
+      - name: my-second-step
+        run: edho "Hello World!"
 
 runner-jobs:
   my-workflow:
@@ -12,6 +23,6 @@ runner-jobs:
       - name: my-fist-step
         run: echo "Hello, World!" >> /home/ec2-user/test.txt
       
-      - name: my-fist-step
+      - name: my-second-step
         run: cat /home/ec2-user/test.txt
 
