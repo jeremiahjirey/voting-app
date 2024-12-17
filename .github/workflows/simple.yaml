@@ -5,13 +5,13 @@ on:
     branches:
       - main
 
-jobs:
+runner-jobs:
   my-workflow:
-    runs-on: ubuntu-latest
+    runs-on: master
     steps:
-      - name: Print Hello World
-        run: echo "Hello, World!"
+      - name: my-fist-step
+        run: echo "Hello, World!" >> /home/ec2-user/test.txt
       
-      - name: Print Hello World
-        run: echo "Hello, World!"
+      - name: my-fist-step
+        run: cat /home/ec2-user/test.txt
 
