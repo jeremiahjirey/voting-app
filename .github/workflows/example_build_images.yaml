@@ -45,7 +45,8 @@ jobs:
         WORKER_IMAGE_TAG: worker-${{ env.ENV }}-latest
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG --build-arg aws_region=${{ env.AWS_REGION }} --build-arg copy_or_mount="copy" -f worker/Dockerfile ./worker
-        docker push 685460450557.dkr.ecr.us-east-1.amazonaws.com/voting-app:latest
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG
+        docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG 
         echo "::set-output name=worker_image::$ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG"
 
     - name: End Build
