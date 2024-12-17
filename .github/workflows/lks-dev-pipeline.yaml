@@ -7,7 +7,7 @@ on:
       - .github/workflows/lks-dev-pipeline.yaml
       - "worker/**"
 
-.env:
+env:
   AWS_REGION: "us-east-1"
   ENV: "dev"
 permissions:
