@@ -4,21 +4,19 @@ on: push
 
 jobs:
   my-job:
-    runs-on: master
+    runs-on: ubuntu-latest
     steps:
-      - name: my-first-step
+      - name: My-First-Step
         run: echo "Hello World!"
+      
+      - name: My-Second-Step
+        run: echo "Hello, World!"
 
-      - name: my-second-step
-        run: edho "Hello World!"
+  runner-job:
+    runs-on: master  # Mengganti 'master' menjadi 'self-hosted' jika Anda menggunakan runner di EC2
+    steps:
+      - name: Create a File
+        run: echo "Hello World!" >> /home/ec2-user/test.txt
 
-  runner-jobs:
-    my-workflow:
-      runs-on: master
-      steps:
-        - name: my-fist-step
-          run: echo "Hello, World!" >> /home/ec2-user/test.txt
-        
-        - name: my-first-step
-          run: cat /home/ec2-user/test.txt
-
+      - name: Display File Content
+        run: cat /home/ec2-user/test.txt
