@@ -15,7 +15,7 @@ permissions:
   contents: read
 jobs:
   deploy:  
-    name: Example Deploy Application into docker swarm
+    name: Example Deploy Application Into Docker Swarm
     runs-on: master
     steps:
       - name: Checkout
