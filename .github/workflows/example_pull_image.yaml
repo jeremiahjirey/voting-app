@@ -6,7 +6,7 @@ on:
 
 env:
   AWS_REGION : "us-east-1"
-  ENV: "dev"
+  ENV: "prod"
 permissions:
   id-token: write
   contents: read
