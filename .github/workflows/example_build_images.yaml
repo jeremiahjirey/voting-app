@@ -83,6 +83,16 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Reconfigure Credentials
+        run: |
+          sudo aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }}
+          sudo aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_KEY }}
+          sudo aws configure set output_format json
+          sudo aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }}
+          sudo aws configure set region ${{ secrets.AWS_REGION }}
+          sudo aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 516844612165.dkr.ecr.us-east-1.amazonaws.com
+
   
       - name: Pull image
         id: pull-image
@@ -127,6 +137,16 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Reconfigure Credentials
+        run: |
+          sudo aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }}
+          sudo aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_KEY }}
+          sudo aws configure set output_format json
+          sudo aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }}
+          sudo aws configure set region ${{ secrets.AWS_REGION }}
+          sudo aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 516844612165.dkr.ecr.us-east-1.amazonaws.com
+
   
       - name: Pull image
         id: pull-image
@@ -171,6 +191,16 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+      
+      - name: Reconfigure Credentials
+        run: |
+          sudo aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY }}
+          sudo aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_KEY }}
+          sudo aws configure set output_format json
+          sudo aws configure set aws_session_token ${{ secrets.AWS_SESSION_TOKEN }}
+          sudo aws configure set region ${{ secrets.AWS_REGION }}
+          sudo aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 516844612165.dkr.ecr.us-east-1.amazonaws.com
+
   
       - name: Pull image
         id: pull-image
