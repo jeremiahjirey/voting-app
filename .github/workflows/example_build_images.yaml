@@ -44,8 +44,8 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}  
-          aws-region: ${{ secrets.AWS_REGION }}
-  
+          aws-region: ${{ secrets.AWS_REGION }}  
+          
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -87,7 +87,8 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}  
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}  
+          
 
           
       - name: Login to Amazon ECR
@@ -98,7 +99,7 @@ jobs:
         id: pull-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ws-apps
+          ECR_REPOSITORY: voting-app
           VOTE_IMAGE_TAG: vote-${{ env.ENV }}-latest
           RESULT_IMAGE_TAG: result-${{ env.ENV }}-latest
           WORKER_IMAGE_TAG: worker-${{ env.ENV }}-latest
@@ -127,7 +128,8 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}  
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}  
+          
   
       - name: Login to Amazon ECR
         id: login-ecr
@@ -137,7 +139,7 @@ jobs:
         id: pull-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ws-apps
+          ECR_REPOSITORY: voting-app
           VOTE_IMAGE_TAG: vote-${{ env.ENV }}-latest
           RESULT_IMAGE_TAG: result-${{ env.ENV }}-latest
           WORKER_IMAGE_TAG: worker-${{ env.ENV }}-latest
@@ -163,9 +165,10 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}  
+          aws-region: ${{ secrets.AWS_REGION }}  
+          
           
       - name: Login to Amazon ECR
         id: login-ecr
@@ -175,7 +178,7 @@ jobs:
         id: pull-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ws-apps
+          ECR_REPOSITORY: voting-app
           VOTE_IMAGE_TAG: vote-${{ env.ENV }}-latest
           RESULT_IMAGE_TAG: result-${{ env.ENV }}-latest
           WORKER_IMAGE_TAG: worker-${{ env.ENV }}-latest
@@ -206,6 +209,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}  
+          aws-region: ${{ secrets.AWS_REGION }}  
+          
