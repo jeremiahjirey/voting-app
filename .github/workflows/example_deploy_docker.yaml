@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Deploy application images to Docker Swarm
+      - name: Deploy Application Images to Docker Swarm
         run: |
           docker node ls
           docker service ls
