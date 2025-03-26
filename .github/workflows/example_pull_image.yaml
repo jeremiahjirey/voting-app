@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Update runner's docker Version, as worker module requires it
         run: |
-          docker --version
+          sudo docker --version
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -44,11 +44,9 @@ jobs:
           WORKER_IMAGE_TAG: worker-${{ env.ENV }}-latest
         # Build docker images for vote module and push it to ECR so that it can be deployed to EKS
         run: |
-          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$VOTE_IMAGE_TAG
-
-          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$RESULT_IMAGE_TAG
-
-          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG
+          sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$VOTE_IMAGE_TAG
+          sudo  docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$RESULT_IMAGE_TAG
+          sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG
       
 
   node1:
@@ -58,7 +56,7 @@ jobs:
     steps:
       - name: Update runner's docker Version, as worker module requires it
         run: |
-          docker --version
+          sudo docker --version
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -85,9 +83,10 @@ jobs:
           WORKER_IMAGE_TAG: worker-${{ env.ENV }}-latest
         # Build docker images for vote module and push it to ECR so that it can be deployed to EKS
         run: |
-          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$VOTE_IMAGE_TAG
+          sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$VOTE_IMAGE_TAG
+          sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$RESULT_IMAGE_TAG
+          sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG   
 
-        
   node2:
     name: Pull Image on node2
     runs-on: node2
@@ -95,7 +94,7 @@ jobs:
     steps:
       - name: Update runner's docker Version, as worker module requires it
         run: |
-          docker --version
+          sudo docker --version
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -122,9 +121,9 @@ jobs:
           WORKER_IMAGE_TAG: worker-${{ env.ENV }}-latest
         # Build docker images for vote module and push it to ECR so that it can be deployed to EKS
         run: |
-          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG
-          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$VOTE_IMAGE_TAG
-          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$RESULT_IMAGE_TAG
+          sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG
+          sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$VOTE_IMAGE_TAG
+          sudo docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$RESULT_IMAGE_TAG
 
           
     
@@ -138,12 +137,12 @@ jobs:
 
       - name: Deploy application images to Docker Swarm
         run: |
-          docker node ls
-          docker service ls
-          docker stack ls
-          docker stack rm stackdemo
-          sleep 30
-          docker stack deploy --compose-file docker-stack.yml stackdemo
+         sudo docker node ls
+         sudo docker service ls
+         sudo docker stack ls
+         sudo docker stack rm stackdemo
+         sleep 30
+         sudo docker stack deploy --compose-file docker-stack.yml stackdemo
       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
