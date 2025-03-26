@@ -11,7 +11,7 @@ on:
 
 env:
   AWS_REGION : "us-east-1"
-  ENV: "ws-dev"
+  ENV: "dev"
 permissions:
   id-token: write
   contents: read
@@ -40,7 +40,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ env.AWS_REGION }}
@@ -75,7 +75,7 @@ jobs:
     steps:
       - name: Update runner's docker Version, as worker module requires it
         run: |
-          docker --version
+          sudo docker --version
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -83,7 +83,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ env.AWS_REGION }}
@@ -114,7 +114,7 @@ jobs:
     steps:
       - name: Update runner's docker Version, as worker module requires it
         run: |
-          docker --version
+          sudo docker --version
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -152,7 +152,7 @@ jobs:
     steps:
       - name: Update runner's docker Version, as worker module requires it
         run: |
-          docker --version
+          sudo docker --version
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -160,7 +160,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ env.AWS_REGION }}
@@ -193,17 +193,17 @@ jobs:
 
       - name: Deploy application images to Docker Swarm
         run: |
-          docker node ls
-          docker service ls
-          docker stack ls
-          docker stack rm stackdemo
-          sleep 30
-          docker stack deploy --compose-file docker-stack.yml stackdemo
+          sudo docker node ls
+          sudo docker service ls
+          sudo docker stack ls
+          sudo docker stack rm stackdemo
+          sudo sleep 30
+          sudo docker stack deploy --compose-file docker-stack.yml stackdemo
       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ env.AWS_REGION }}
