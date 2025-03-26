@@ -21,11 +21,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Deploy Application Images to Docker Swarm
+      - name: Deploy Application images to Docker Swarm
         run: |
-          sudo docker node ls
-          sudo docker service ls
-          sudo docker stack ls
-          sudo docker stack rm stackdemo
+          docker node ls
+          docker service ls
+          docker stack ls
+          docker stack rm stackdemo
           sleep 30
-          sudo docker stack deploy --compose-file docker-stack.yml stackdemo
+          docker stack deploy --compose-file docker-stack.yml stackdemo
