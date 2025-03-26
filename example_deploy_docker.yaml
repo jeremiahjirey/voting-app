@@ -23,9 +23,9 @@ jobs:
 
       - name: Deploy Application images to Docker Swarm
         run: |
-          docker node ls
-          docker service ls
-          docker stack ls
-          docker stack rm stackdemo
+          sudo docker node ls
+          sudo docker service ls
+          sudo docker stack ls
+          sudo docker stack rm stackdemo
           sleep 30
-          docker stack deploy --compose-file docker-stack.yml stackdemo
+          sudo docker stack deploy --compose-file docker-stack.yml stackdemo
