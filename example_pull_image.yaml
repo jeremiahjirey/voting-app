@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - "dev"
+    paths:
+      - .github/workflows/example_build_images.yaml
 
 env:
   AWS_REGION : "us-east-1"
@@ -11,9 +13,9 @@ permissions:
   id-token: write
   contents: read
 jobs:
-  master:
+  node1:
     name: Example Pull Image on node1
-    runs-on: master
+    runs-on: node1
     steps:
       - name: Update runner's docker Version, as worker module requires it
         run: |
@@ -39,11 +41,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: voting-app
-          VOTE_IMAGE_TAG: vote-${{ env.ENV }}-latest
-          RESULT_IMAGE_TAG: result-${{ env.ENV }}-latest
           WORKER_IMAGE_TAG: worker-${{ env.ENV }}-latest
         # Build docker images for vote module and push it to ECR so that it can be deployed to EKS
         run: |
           docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$WORKER_IMAGE_TAG   
-          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$VOTE_IMAGE_TAG 
-          docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$RESULT_IMAGE_TAG     
