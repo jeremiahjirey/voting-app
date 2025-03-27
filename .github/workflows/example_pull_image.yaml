@@ -12,9 +12,9 @@ permissions:
   id-token: write
   contents: read
 jobs:
-  master:
-    name: Example Pull Image on master
-    runs-on: master
+  node1:
+    name: Example Pull Image on node1
+    runs-on: node1
     steps:
       - name: Update runner's docker Version, as worker module requires it
         run: |
